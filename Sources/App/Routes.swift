@@ -3,6 +3,9 @@ import Vapor
 extension Droplet {
     func setupRoutes() throws {
         get("/") { req in
+            let diceRoll = Int(arc4random_uniform(999999))
+            let testModel = TestModel(email: "\(diceRoll)@example.com")
+            try testModel.save()
             return req.description
         }
 
