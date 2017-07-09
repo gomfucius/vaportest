@@ -1,10 +1,13 @@
 import Vapor
+import Foundation
 
 extension Droplet {
     func setupRoutes() throws {
         get("/") { req in
-            let diceRoll = Int(arc4random_uniform(999999))
-            let testModel = TestModel(email: "\(diceRoll)@example.com")
+            let date = Date()
+            let calendar = Calendar.current
+            let second = calendar.component(.second, from: date)
+            let testModel = TestModel(email: "\(second)@example.com")
             try testModel.save()
             return req.description
         }
